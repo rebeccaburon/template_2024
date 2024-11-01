@@ -1,16 +1,17 @@
 package app.routes;
 
-import app.entities.Person;
 import io.javalin.apibuilder.EndpointGroup;
+import jakarta.persistence.EntityManagerFactory;
 
-import static io.javalin.apibuilder.ApiBuilder.path;
 
 public class Routes {
-    private PersonRoute personRoute = new PersonRoute();
+
+    public Routes(EntityManagerFactory emf) {
+
+    }
 
     public EndpointGroup getRoutes() {
         return () -> {
-            path("/", personRoute.addPersonRoutes());
 
         };
     }

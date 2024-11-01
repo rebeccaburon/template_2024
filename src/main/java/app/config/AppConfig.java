@@ -8,12 +8,12 @@ import app.security.routes.SecurityRoutes;
 import app.util.ApiProps;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class AppConfig {
     private static Javalin app;
-    private static final ExceptionController getExceptionController = new ExceptionController();
     private static Routes routes;
     private static AccessController accessController = new AccessController();
     private static final ExceptionController exceptionController = new ExceptionController();
@@ -48,8 +48,8 @@ public class AppConfig {
     }
 
     //start server
-    public static void startServer() {
-        routes = new Routes();
+    public static void startServer(EntityManagerFactory emf) {
+        routes = new Routes(emf);
         app = Javalin.create(AppConfig::configuration);
         app.beforeMatched(accessController::accessHandler);
         app.start(ApiProps.PORT);

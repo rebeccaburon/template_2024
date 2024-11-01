@@ -1,6 +1,6 @@
 package app.config;
 
-import app.entities.Person;
+import app.entities.AEntitie;
 import app.security.entities.Role;
 import app.security.entities.User;
 
@@ -10,7 +10,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import java.time.Period;
 import java.util.Properties;
 
 /**
@@ -37,7 +36,7 @@ public class HibernateConfig {
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Role.class);
-        configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(AEntitie.class);
 
     }
 
@@ -93,7 +92,7 @@ public class HibernateConfig {
     }
 
     private static Properties setTestProperties(Properties props) {
-//        props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+//        props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); //Generate SQL statements that are compatible with PostgreSQL syntax.
         props.put("hibernate.connection.driver_class", "org.testcontainers.jdbc.ContainerDatabaseDriver");
         props.put("hibernate.connection.url", "jdbc:tc:postgresql:15.3-alpine3.18:///test_db");
         props.put("hibernate.connection.username", "postgres");
