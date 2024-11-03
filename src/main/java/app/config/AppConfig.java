@@ -2,6 +2,7 @@ package app.config;
 
 import app.exceptions.ApiException;
 import app.controller.ExceptionController;
+import app.exceptions.JPAException;
 import app.routes.Routes;
 import app.security.controller.AccessController;
 import app.security.routes.SecurityRoutes;
@@ -43,6 +44,7 @@ public class AppConfig {
     //Exceptions
     private static void exceptionContext(Javalin app) {
         app.exception(ApiException.class, exceptionController::apiExceptionHandler);
+        app.exception(JPAException.class, exceptionController::jpaExceptionHandler);
 
         app.exception(Exception.class, exceptionController::exceptionHandler);
     }
